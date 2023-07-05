@@ -369,7 +369,7 @@ jobs:
             echo "${API_URL}"
             if curl "${API_URL}/api/status" | grep "ok"
             then
-                exit 0
+                exit 1 # TODO: change this to 0 after pipeline failed!!
             else
                 exit 1
             fi
