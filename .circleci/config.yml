@@ -109,9 +109,8 @@ jobs:
           command: |
             cd frontend
             npm i
-            npm audit
-            # npm audit fix --audit-level=critical --force
-            # npm audit fix --force
+            npm audit fix --audit-level=critical --force
+            npm audit fix --force
             # If the "npm audit fix" command above could not fix all critical vulnerabilities, try “npm audit fix --force” again
             # npm audit --audit-level=critical
             exit 0
@@ -126,9 +125,8 @@ jobs:
           command: |
             cd backend
             npm i
-            npm audit
-            # npm audit fix --audit-level=critical --force
-            # npm audit fix --force
+            npm audit fix --audit-level=critical --force
+            npm audit fix --force
             # If the "npm audit fix" command above could not fix all critical vulnerabilities, try “npm audit fix --force” again
             # npm audit --audit-level=critical
             exit 0
