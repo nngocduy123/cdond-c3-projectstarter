@@ -42,7 +42,7 @@
     sleep 10
   environment:
     VERSION: 1
-    NODE_ENV: local
+    NODE_ENV: "{{ lookup('env', 'NODE_ENV') }}"
     ENVIRONMENT: production
     TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
     TYPEORM_MIGRATIONS: "{{ lookup('env', 'TYPEORM_MIGRATIONS')}}"
