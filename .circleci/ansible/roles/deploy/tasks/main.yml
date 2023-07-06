@@ -38,7 +38,7 @@
 - name: "start the app"
   become: true
   shell: |
-    pm2 start --name backend -f npm -- run start
+    pm2 start --name backend -f npm -- run "start:dev"
     sleep 10
   environment:
     VERSION: 1
