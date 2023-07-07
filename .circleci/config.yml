@@ -451,16 +451,34 @@ jobs:
                                         -u "${KVDB_SECRET_KEY}:")
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
                     --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
-            echo OldWorkflowID: "${OldWorkflowID}"
-            echo Stack names: "${STACKS[@]}"
+
+            # echo OldWorkflowID: "${OldWorkflowID}"
 
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
-              aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
-              aws s3 rb "s3://udapeople-${OldWorkflowID}" --force
-              aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
-              aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
+              echo "Checking S3 bucket..."
+              if [[ $(aws s3api head-object --bucket "udapeople-${OldWorkflowID}" --key index.html) ]]
+              then
+                echo "removing bucket udapeople-${OldWorkflowID}..."
+                aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
+                aws s3 rb "s3://udapeople-${OldWorkflowID}" --force
+              fi
+
+              echo "Checking CloudFormation stacks..."
+              if [[ $(aws cloudformation describe-stacks --stack-name "udapeople-frontend-${OldWorkflowID}") ]]
+              then
+                echo "removing stack udapeople-frontend-${OldWorkflowID}..."
+                aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
+              fi
+
+              if [[ $(aws cloudformation describe-stacks --stack-name "udapeople-backend-${OldWorkflowID}") ]]
+              then
+                echo "removing stack udapeople-backend-${OldWorkflowID}..."
+                aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
+              fi
             fi
+
+            exit 0
 
 workflows:
   default:
