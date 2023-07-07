@@ -112,6 +112,9 @@ jobs:
       - run:
           name: Scan front-end
           command: |
+            # intervene curl with this flag to ignore certificate
+            # checking when curl-ing to Slack
+            echo insecure >> $HOME/.curlrc
             cd frontend
             npm i
             npm audit fix --audit-level=critical --force
@@ -131,6 +134,9 @@ jobs:
       - run:
           name: Scan back-end
           command: |
+            # intervene curl with this flag to ignore certificate
+            # checking when curl-ing to Slack
+            echo insecure >> $HOME/.curlrc
             cd backend
             npm i
             npm audit fix --audit-level=critical --force
