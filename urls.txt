@@ -2,4 +2,4 @@ URL01: https://github.com/nngocduy123/cdond-c3-projectstarter
 URL02: http://udapeople-320d908.s3-website-us-east-1.amazonaws.com
 
 Cloudfront endpoint: http://d149kzi7gheu1z.cloudfront.net
-Prometheus endpoint: http://ec2-54-83-69-36.compute-1.amazonaws.com:9090/targets
+Prometheus endpoint: http://ec2-54-158-44-190.compute-1.amazonaws.com:9090/targets

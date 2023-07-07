@@ -33,7 +33,10 @@ commands:
               npm i
               npm run migrations:revert
             fi
-            
+
+orbs:
+  slack: circleci/slack@4.1
+       
 jobs:
   build-frontend:
     docker:
@@ -115,7 +118,10 @@ jobs:
             npm audit fix --force
             # If the "npm audit fix" command above could not fix all critical vulnerabilities, try “npm audit fix --force” again
             # npm audit --audit-level=critical
-            exit 0
+            exit 1 # TODO: CHANGE TO 0 AFTER CAPTURE SCREENSHOT
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
 
   scan-backend:
     docker:
@@ -131,7 +137,10 @@ jobs:
             npm audit fix --force
             # If the "npm audit fix" command above could not fix all critical vulnerabilities, try “npm audit fix --force” again
             # npm audit --audit-level=critical
-            exit 0
+            exit 1 # TODO: CHANGE TO 0 AFTER CAPTURE SCREENSHOT
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
 
   deploy-infrastructure:
     docker:
