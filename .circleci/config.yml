@@ -121,7 +121,7 @@ jobs:
             npm audit fix --force
             # If the "npm audit fix" command above could not fix all critical vulnerabilities, try “npm audit fix --force” again
             # npm audit --audit-level=critical
-            exit 1 # TODO: CHANGE TO 0 AFTER CAPTURE SCREENSHOT
+            exit 0
       - slack/notify:
           event: fail
           template: basic_fail_1
@@ -143,7 +143,7 @@ jobs:
             npm audit fix --force
             # If the "npm audit fix" command above could not fix all critical vulnerabilities, try “npm audit fix --force” again
             # npm audit --audit-level=critical
-            exit 1 # TODO: CHANGE TO 0 AFTER CAPTURE SCREENSHOT
+            exit 0
       - slack/notify:
           event: fail
           template: basic_fail_1
